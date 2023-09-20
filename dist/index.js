@@ -1,5 +1,3 @@
-const API_KEY = process.env.API_KEY;
-
 const form = document.querySelector('form');
 const loc = document.querySelector('.location-input');
 const time1 = document.querySelector('.time1');
