@@ -221,8 +221,6 @@ form.addEventListener('submit', async (e) => {
         const res3 = await fetch(url3);
         const data3 = await res3.json();
 
-        console.log(data3);
-
         for(let i=0; i<=2; i++) {
             const hourly = data3[i];
 
