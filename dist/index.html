@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;900&family=Poppins&family=Roboto&family=Roboto+Condensed:wght@300&family=Ubuntu&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    
+    <h1 class="title">Weather App</h1>
+
+    <section class="container">
+        <div class="container-top">
+            <form action="">
+                <input type="text" name="location" class="location-input" placeholder="Please enter a city">
+            </form>
+            <div class="time">
+                <h2 class="time1"></h2>
+                <h4 class="time2"></h4>
+            </div>   
+        </div>
+
+        <div class="container-body">
+            <p class="zone"><span class="timezone hide">Timezone : </span></p>
+            <label class="switch hide">
+                <input type="checkbox" class="temp-btn">
+                <span class="slider round"></span>
+            </label>
+            <div class="duration">
+                <button class="daily-btn hide">Daily</button>
+                <button class="hourly-btn hide">Hourly</button>
+            </div>
+            <div>
+                <div class="daily-container hide">
+                    <div class="card" id="day1"></div>
+                    <div class="card" id="day2"></div>
+                    <div class="card" id="day3"></div>
+                </div>
+                <div class="hourly-container hide">
+                    <div class="card" id="hour1"></div>
+                    <div class="card" id="hour2"></div>
+                    <div class="card" id="hour3"></div>
+                </div>                
+            </div>
+        </div>
+    </section>    
+
+    <script src="index.js"></script>
+    
+</body>
+</html>
