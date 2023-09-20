@@ -188,7 +188,7 @@ form.addEventListener('submit', async (e) => {
         // let data = await res.json();
         // const {lat : latVal, lon : lonVal} = data[0];
 
-        // let res =  await fetch(`http://dataservice.accuweather.com/locations/v1/search?apikey=${API_KEY}&q=${locValue}&details=true HTTP/1.1`);
+        // const res1 =  await fetch(`http://dataservice.accuweather.com/locations/v1/search?apikey=${API_KEY}&q=${locValue}&details=true HTTP/1.1`);
         const url1 = `/.netlify/functions/weather1?locValue=${locValue}`;
         const res1 =  await fetch(url1);
         const data1 = await res1.json();
@@ -216,10 +216,12 @@ form.addEventListener('submit', async (e) => {
         }
         displayTempVal();
 
-        // const res3 =  await fetch(`http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/202396?apikey=${API_KEY}&details=true&metric=true HTTP/1.1`);
+        // const res3 =  await fetch(`http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${locKey}?apikey=${API_KEY}&details=true&metric=true HTTP/1.1`);
         const url3 = `/.netlify/functions/weather3?locKey=${locKey}`;
         const res3 = await fetch(url3);
         const data3 = await res3.json();
+
+        console.log(data3);
 
         for(let i=0; i<=2; i++) {
             const hourly = data3[i];
