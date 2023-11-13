@@ -187,11 +187,6 @@ form.addEventListener('submit', async (e) => {
     try {
         const locValue = loc.value;
 
-        // let res = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${locValue}&limit=1&appid=key`);
-        // let data = await res.json();
-        // const {lat : latVal, lon : lonVal} = data[0];
-
-        // const res1 =  await fetch(`http://dataservice.accuweather.com/locations/v1/search?apikey=${API_KEY}&q=${locValue}&details=true HTTP/1.1`);
         const url1 = `/.netlify/functions/weather1?locValue=${locValue}`;
         const res1 =  await fetch(url1);
         const data1 = await res1.json();
@@ -199,7 +194,6 @@ form.addEventListener('submit', async (e) => {
         const locKey = data1[0].Key;
         timezone.innerHTML = 'Timezone : ' + data1[0].TimeZone.Name;
 
-        // const res2 =  await fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locKey}?apikey=${API_KEY}&metric=true HTTP/1.1`);
         const url2 = `/.netlify/functions/weather2?locKey=${locKey}`;
         const res2 =  await fetch(url2);
         const data2 = await res2.json();
@@ -219,7 +213,6 @@ form.addEventListener('submit', async (e) => {
         }
         displayTempVal();
 
-        // const res3 =  await fetch(`http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${locKey}?apikey=${API_KEY}&details=true&metric=true HTTP/1.1`);
         const url3 = `/.netlify/functions/weather3?locKey=${locKey}`;
         const res3 = await fetch(url3);
         const data3 = await res3.json();
