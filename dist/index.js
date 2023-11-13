@@ -167,6 +167,9 @@ form.addEventListener('submit', async (e) => {
     temp_unit = 'C';
     duration='daily';
 
+    dailyWeatherArr.length = 0;
+    hourlyWeatherArr.length = 0;
+
     for(let day of days) {
         let children = Array.from(day.children);
         for(let child of children) {
