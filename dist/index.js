@@ -18,7 +18,7 @@ const hour2 = document.querySelector('#hour2');
 const hour3 = document.querySelector('#hour3');
 const hours = [hour1, hour2, hour3];
 const monthsName = [, 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
-const daysName = ['Sunday', 'Monday', 'Tueday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+const daysName = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 let temp_unit = 'C';
 let duration = 'daily';
 
@@ -59,6 +59,7 @@ const setTime = function() {
 }
 
 setTime();
+setInterval(setTime, 30000);
 
 const setDate = function(date) {
     return `${parseInt(date[8]+date[9])} ${monthsName[parseInt(date[5]+date[6])]}`;
