@@ -118,16 +118,16 @@ const setHourlyWeather = function(hourly) {
     return hourlyWeatherObj;
 }
 
-const changeTempUnit = function() {
-    for(let i=0; i<dailyWeatherArr.length; i++) {
-        days[i].children[1].innerHTML = `Max : ${dailyWeatherArr[i].max[temp_unit]}°${temp_unit}`;
-        days[i].children[2].innerHTML = `Min : ${dailyWeatherArr[i].min[temp_unit]}°${temp_unit}`;
-    }
+const changeTempUnit = function () {
+  for (let i = 0; i < dailyWeatherArr.length; i++) {
+    days[i].children[1].innerHTML = `<i class="fa-solid fa-temperature-high fa-lg" style="color: #ffffff;"></i> : ${dailyWeatherArr[i].max[temp_unit]}°${temp_unit}`;
+    days[i].children[2].innerHTML = `<i class="fa-solid fa-temperature-empty fa-lg" style="color: #ffffff;"></i> : ${dailyWeatherArr[i].min[temp_unit]}°${temp_unit}`;
+  }
 }
 
 const changeTempUnit2 = function() {
     for(let i=0; i<hourlyWeatherArr.length; i++) {
-        hours[i].children[1].innerHTML = `${hourlyWeatherArr[i].temp[temp_unit]}°${temp_unit}`;
+        hours[i].children[1].innerHTML = `<i class="fa-solid fa-temperature-half fa-lg" style="color: #ffffff;"></i> : ${hourlyWeatherArr[i].temp[temp_unit]}°${temp_unit}`;
     }
 }
 
@@ -135,10 +135,10 @@ const displayTempVal = function() {
     for(let i=0; i<days.length; i++) {
         let children = Array.from(days[i].children);
         children[0].innerHTML = dailyWeatherArr[i].date;
-        children[1].innerHTML = `Max : ${dailyWeatherArr[i].max[temp_unit]}°${temp_unit}`;
-        children[2].innerHTML = `Min : ${dailyWeatherArr[i].min[temp_unit]}°${temp_unit}`;
-        children[3].innerHTML = `Day : ${dailyWeatherArr[i].remark.day}`;
-        children[4].innerHTML = `Night : ${dailyWeatherArr[i].remark.night}`;
+        children[1].innerHTML = `<i class="fa-solid fa-temperature-high fa-lg" style="color: #ffffff;"></i> : ${dailyWeatherArr[i].max[temp_unit]}°${temp_unit}`;
+        children[2].innerHTML = `<i class="fa-solid fa-temperature-empty fa-lg" style="color: #ffffff;"></i> : ${dailyWeatherArr[i].min[temp_unit]}°${temp_unit}`;
+        children[3].innerHTML = `<i class="fa-regular fa-sun fa-lg" style="color: #ffffff;"></i> : ${dailyWeatherArr[i].remark.day}`;
+        children[4].innerHTML = `<i class="fa-regular fa-moon fa-lg" style="color: #ffffff;"></i> : ${dailyWeatherArr[i].remark.night}`;
     }
 }
 
@@ -146,9 +146,9 @@ const displayTempVal2 = function() {
     for(let i=0; i<hours.length; i++) {
         let children = Array.from(hours[i].children);
         children[0].innerHTML = hourlyWeatherArr[i].hour;
-        children[1].innerHTML = `${hourlyWeatherArr[i].temp[temp_unit]}°${temp_unit}`;
-        children[2].innerHTML = `${hourlyWeatherArr[i].wind}`;
-        children[3].innerHTML = `${hourlyWeatherArr[i].remark}`;
+        children[1].innerHTML = `<i class="fa-solid fa-temperature-half fa-lg" style="color: #ffffff;"></i> : ${hourlyWeatherArr[i].temp[temp_unit]}°${temp_unit}`;
+        children[2].innerHTML = `<i class="fa-solid fa-wind fa-lg" style="color: #ffffff;"></i> : ${hourlyWeatherArr[i].wind}`;
+        children[3].innerHTML = `<i class="fa-solid fa-water fa-lg" style="color: #ffffff;"></i> : ${hourlyWeatherArr[i].remark}`;
     }
 }
 
