@@ -17,15 +17,20 @@ body {
   font-weight: bolder;
 }
 
-.outer-container {
+#outer-container {
   text-align: center;
   margin: 3.125rem auto 2rem;
   background-color: rgba(17, 13, 15, 0.279);
   box-shadow: 2px 2px 30px 5px rgba(4, 4, 5, 0.973);
   width: 50rem;
+  box-sizing: content-box;
 }
 
-.container-top {
+.form-input {
+  display: flex;
+}
+
+#container-top {
   background: url(images/city.jpeg);
   background-repeat: no-repeat;
   background-size: 100%;
@@ -65,28 +70,21 @@ body {
   height: 20px;
 }
 
-.time {
+.time-local, .time-regional {
   font-family: "Ubuntu", sans-serif;
-  /* display: flex; */
   flex-direction: column;
+  margin-bottom: 2rem;
 }
 
-.time1 {
-  margin-bottom: 0.5rem;
-}
-
-.time > h2 {
+.time-local > h2, .time-regional > h2 {
   font-size: 28px;
   font-weight: bolder;
 }
 
-.time > h4 {
+.time-local > h4, .time-regional > h4 {
   font-size: 16px;
   font-weight: bolder;
   line-height: normal;
-}
-
-.time2 {
 }
 
 .zone {
@@ -226,14 +224,13 @@ input:checked + .slider:before {
 }
 
 @media (max-width: 900px) {
-  .outer-container {
+  #outer-container {
     width: 60%;
   }
   .location-input {
     width: 80%;
   }
-  .daily-container,
-  .hourly-container {
+  .daily-container, .hourly-container {
     grid-template-columns: 1fr;
     justify-items: center;
   }
