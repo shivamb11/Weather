@@ -97,6 +97,11 @@ body {
   margin-top: 1rem;
 }
 
+.temp-unit {
+  margin: 4px;
+  font-family: "Ubuntu", sans-serif;
+}
+
 /* The switch - the box around the slider */
 .switch {
   position: relative;
