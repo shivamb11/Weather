@@ -1,8 +1,12 @@
 const form = document.querySelector('form');
 const loc = document.querySelector('.location-input');
-const time1 = document.querySelector('.time1');
-const time2 = document.querySelector('.time2');
-const timezone = document.querySelector('.timezone');
+const timeLocal1 = document.querySelector(".time-local-1");
+const timeLocal2 = document.querySelector(".time-local-2");
+const timeRegional1 = document.querySelector(".time-regional-1");
+const timeRegional2 = document.querySelector(".time-regional-2");
+const locationRegional = document.querySelector(".location-regional");
+const timezone = document.querySelector(".timezone");
+const tempUnits = document.querySelectorAll(".temp-unit");
 const tempSwitch = document.querySelector('.switch');
 const tempBtn = document.querySelector('.temp-btn');
 const dailyBtn = document.querySelector('.daily-btn');
@@ -19,6 +23,8 @@ const hour3 = document.querySelector('#hour3');
 const hours = [hour1, hour2, hour3];
 const monthsName = [, 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
 const daysName = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+let timeZone = {};
 let temp_unit = 'C';
 let duration = 'daily';
 
@@ -43,23 +49,53 @@ class HourlyWeather {
 const dailyWeatherArr = [];
 const hourlyWeatherArr = [];
 
-const setTime = function() {
-    const currDate = new Date();
-    let hrs = currDate.getHours().toString();
-    let min = currDate.getMinutes().toString();
-    let day = currDate.getDay().toString();
-    let date = currDate.getDate().toString();
-    let month = currDate.getMonth().toString();
-    
-    if(hrs.length == 1) hrs = `0${hrs}`;
-    if(min.length == 1) min = `0${min}`;
+const setLocalTime = function () {
+  const currDate = new Date();
+  let hrs = currDate.getHours().toString();
+  let min = currDate.getMinutes().toString();
+  let day = currDate.getDay().toString();
+  let date = currDate.getDate().toString();
+  let month = currDate.getMonth().toString();
 
-    time1.innerHTML = `${hrs}:${min}`;
-    time2.innerHTML = `${daysName[day]}, ${date} ${monthsName[parseInt(month)+1]}`;
-}
+  if (hrs.length == 1) hrs = `0${hrs}`;
+  if (min.length == 1) min = `0${min}`;
 
-setTime();
-setInterval(setTime, 30000);
+  timeLocal1.innerHTML = `${hrs}:${min}`;
+  timeLocal2.innerHTML = `${daysName[day]}, ${date} ${monthsName[parseInt(month) + 1]}`;
+};
+
+setLocalTime();
+setInterval(setLocalTime, 30000);
+
+const setRegionalTime = function () {
+  if (Object.keys(timeZone).length === 0) return;
+
+  const currDate = new Date();
+
+  if (timeZone.GmtOffset * -60 === currDate.getTimezoneOffset()) return;
+
+  const options1 = { timeZone: timeZone.Name };
+  let currRegionalDate = currDate.toLocaleString("en-GB", options1);
+
+  let hrs = currRegionalDate[12] + currRegionalDate[13];
+  let min = currRegionalDate[15] + currRegionalDate[16];
+  let date = currRegionalDate[0] + currRegionalDate[1];
+  let month = currRegionalDate[3] + currRegionalDate[4];
+
+  // if (hrs.length == 1) hrs = `0${hrs}`;
+  // if (min.length == 1) min = `0${min}`;
+
+  const options2 = { timeZone: timeZone.Name, weekday: "long" };
+  currRegionalDate = currDate.toLocaleString("en-GB", options2);
+
+  let day = currRegionalDate;
+
+  timeRegional1.innerHTML = `${hrs}:${min}`;
+  timeRegional2.innerHTML = `${day}, ${date} ${monthsName[parseInt(month)]}`;
+  locationRegional.innerHTML = timeZone.Name.split("/")[1];
+};
+
+setInterval(setRegionalTime, 30000);
 
 const setDate = function(date) {
     return `${parseInt(date[8]+date[9])} ${monthsName[parseInt(date[5]+date[6])]}`;
@@ -156,6 +192,8 @@ form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     timezone.classList.remove('hide');
+    tempUnits[0].classList.remove("hide");
+    tempUnits[1].classList.remove("hide");
     tempSwitch.classList.remove('hide');
     dailyBtn.classList.remove('hide');
     hourlyBtn.classList.remove('hide');
@@ -164,6 +202,10 @@ form.addEventListener('submit', async (e) => {
     dailyContainer.classList.remove('hide');
     if(!hourlyContainer.classList.contains('hide')) hourlyContainer.classList.add('hide');
     tempBtn.checked = false;
+
+    timeRegional1.innerHTML = "";
+    timeRegional2.innerHTML = "";
+    locationRegional.innerHTML = "";
 
     temp_unit = 'C';
     duration='daily';
@@ -193,7 +235,9 @@ form.addEventListener('submit', async (e) => {
         const data1 = await res1.json();
 
         const locKey = data1[0].Key;
-        timezone.innerHTML = 'Timezone : ' + data1[0].TimeZone.Name;
+        timeZone = data1[0].TimeZone;
+        timezone.innerHTML = "Timezone : " + timeZone.Name;
+        setRegionalTime();
 
         const url2 = `/.netlify/functions/weather2?locKey=${locKey}`;
         const res2 =  await fetch(url2);
